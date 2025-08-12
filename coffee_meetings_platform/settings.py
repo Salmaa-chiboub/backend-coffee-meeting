@@ -168,7 +168,7 @@ else:
     except ValueError:
         pass
 
-# Performance Logging Configuration
+# Performance Logging Configuration - Simplifié pour Render
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -177,43 +177,24 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
-        'performance': {
-            'format': '[PERF] {asctime} {name} {levelname} {message}',
-            'style': '{',
-        },
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
-            'level': 'WARNING',  # Seulement les warnings et erreurs dans la console
-        },
-        'performance_file': {
-            'class': 'logging.FileHandler',
-            'filename': 'logs/performance.log',
-            'formatter': 'performance',
+            'level': 'WARNING',
         },
     },
     'loggers': {
         'django.db.backends': {
             'handlers': ['console'],
-            'level': 'WARNING',  # Désactiver les logs DEBUG et INFO
-            'propagate': False,
-        },
-        'utils.cache_utils': {
-            'handlers': ['console', 'performance_file'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'matching.services': {
-            'handlers': ['console', 'performance_file'],
-            'level': 'INFO',
+            'level': 'WARNING',
             'propagate': False,
         },
     },
     'root': {
         'handlers': ['console'],
-        'level': 'WARNING',  # Désactiver les logs DEBUG et INFO globalement
+        'level': 'WARNING',
     },
 }
 
