@@ -213,7 +213,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         """Send password reset email to user"""
         try:
             # Create reset URL (you can customize this based on your frontend)
-            reset_url = f"http://localhost:3000/reset-password?token={reset_token.token}"
+            reset_url = f"{settings.FRONTEND_URL}/reset-password?token={reset_token.token}"
 
             # Email subject and content
             subject = "🔐 Password Reset - Coffee Meetings Platform"
