@@ -66,11 +66,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     # CSRF middleware disabled for API endpoints - JWT authentication is used instead
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.AxesMiddleware',
     'utils.middleware.PerformanceMiddleware',
     'coffee_meetings_platform.middleware.UserDataIsolationMiddleware',
 ]
@@ -302,8 +301,7 @@ AXES_ONLY_USER_FAILURES = True  # bloquer par username et non IP
 
 
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesBackend',
-    'django.contrib.auth.backends.ModelBackend',
+     'django.contrib.auth.backends.ModelBackend',
 ]
 
 # CORS Configuration
