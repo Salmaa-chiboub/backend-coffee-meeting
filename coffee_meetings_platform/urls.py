@@ -15,14 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path , include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
-    path('campaigns/', include('campaigns.urls')),  # Correction: campaigns au lieu de compaigns
+    path('campaigns/', include('campaigns.urls')),
     path('employees/', include('employees.urls')),
     path('evaluations/', include('evaluations.urls')),
     path('matching/', include('matching.urls')),
@@ -30,6 +30,6 @@ urlpatterns = [
     path('notifications/', include('notifications.urls')),
 ]
 
-# Serve media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files in both development and production
+# This ensures media files are served correctly on Railway and other platforms
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
