@@ -167,7 +167,7 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
-            'level': 'WARNING',
+            'level': 'DEBUG',  # Passe à DEBUG pour plus de détails
         },
     },
     'loggers': {
@@ -175,6 +175,16 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'WARNING',
             'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',  # Log des erreurs HTTP 500
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
         },
     },
     'root': {
