@@ -135,9 +135,8 @@ else:
     # 🔹 Mode production : Redis performant et persistant
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'BACKEND': 'django_redis.cache.RedisCache',  # <-- ici django_redis au lieu de django.core.cache.backends.redis
             'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
-            'TIMEOUT': 300,  # 5 minutes
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
                 'PARSER_CLASS': 'redis.connection.HiredisParser',
@@ -152,8 +151,10 @@ else:
                 'RETRY_ON_TIMEOUT': True,
             },
             'KEY_PREFIX': 'coffee_meetings',
+            'TIMEOUT': 300,
         }
     }
+
 
 # Middleware cache settings — activé seulement en prod
 if not DEBUG:
