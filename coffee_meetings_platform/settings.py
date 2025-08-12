@@ -239,7 +239,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.2/topics/files/
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Railway-specific media configuration
+if 'RAILWAY' in os.environ:
+    # Railway provides persistent storage at /app/media
+    MEDIA_ROOT = '/app/media'
+    STATIC_ROOT = '/app/staticfiles'
+else:
+    # Local development
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Ensure directories exist
+if not DEBUG and 'RAILWAY' in os.environ:
+    os.makedirs(MEDIA_ROOT, exist_ok=True)
+    os.makedirs(STATIC_ROOT, exist_ok=True)
 
 # File Upload Settings
 # https://docs.djangoproject.com/en/5.2/ref/settings/#file-upload-max-memory-size
