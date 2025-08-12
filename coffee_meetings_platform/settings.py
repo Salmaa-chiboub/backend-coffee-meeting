@@ -132,26 +132,10 @@ if DEBUG:
         }
     }
 else:
-    # 🔹 Mode production : Redis performant et persistant
+     # En production aussi, désactiver Redis tant que non configuré
     CACHES = {
         'default': {
-            'BACKEND': 'django_redis.cache.RedisCache',  # <-- ici django_redis au lieu de django.core.cache.backends.redis
-            'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
-            'OPTIONS': {
-                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-                'PARSER_CLASS': 'redis.connection.HiredisParser',
-                'SOCKET_TIMEOUT': 5,
-                'SOCKET_CONNECT_TIMEOUT': 5,
-                'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
-                'CONNECTION_POOL_CLASS_KWARGS': {
-                    'max_connections': 50,
-                    'timeout': 20,
-                },
-                'MAX_CONNECTIONS': 1000,
-                'RETRY_ON_TIMEOUT': True,
-            },
-            'KEY_PREFIX': 'coffee_meetings',
-            'TIMEOUT': 300,
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
 
